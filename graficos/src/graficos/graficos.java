@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -33,13 +34,14 @@ public class graficos extends Application {
         Button btnar = new Button();
         Button btnab = new Button();
         Button btnN = new Button();
-        
+        Button btnac = new Button();
         
         btni.setText("←");
         btnd.setText("→");
         btnar.setText("↑");
         btnab.setText("↓");
         btnN.setText("Generar Nuevo Mapa");
+        btnac.setText("Abrir cofre");
         
         btni.setLayoutX(500);
         btni.setLayoutY(400);
@@ -51,17 +53,25 @@ public class graficos extends Application {
         btnab.setLayoutY(430);
         btnN.setLayoutX(600);
         btnN.setLayoutY(370);
+        btnac.setLayoutX(600);
+        btnac.setLayoutY(400);
         
         jugador p1 = new jugador();
         
-       
-        
         Pane root = new Pane();
+        Label din = new Label(Integer.toString(p1.din));
+        
+        din.setLayoutX(500);
+        din.setLayoutY(0);
+        
         root.getChildren().add(btni);
         root.getChildren().add(btnd);
         root.getChildren().add(btnar);
         root.getChildren().add(btnab);
         root.getChildren().add(btnN);
+        root.getChildren().add(btnac);
+        root.getChildren().add(din);
+        btnac.setVisible(false);
         
         Canvas lienzo = new Canvas(500,500);
         root.getChildren().add(lienzo);
@@ -78,6 +88,7 @@ public class graficos extends Application {
                 if(map.cuadC[p1.pos_x-1][p1.pos_y] == 0){
                     map.imprimirCuad(map.cuad, grafico);
                     p1.moverIzq(p1,grafico);
+                    p1.verificarC(map,btnac);
                 }
             }
         });
@@ -88,6 +99,7 @@ public class graficos extends Application {
                 if(map.cuadC[p1.pos_x+1][p1.pos_y] == 0){
                     map.imprimirCuad(map.cuad, grafico);
                     p1.moverDer(p1,grafico);
+                    p1.verificarC(map,btnac);
                 }
             }
         });
@@ -98,6 +110,7 @@ public class graficos extends Application {
                 if(map.cuadC[p1.pos_x][p1.pos_y-1] == 0){
                     map.imprimirCuad(map.cuad, grafico);
                     p1.moverArriba(p1,grafico);
+                    p1.verificarC(map,btnac);
                 }
             }
         });
@@ -108,6 +121,7 @@ public class graficos extends Application {
                 if(map.cuadC[p1.pos_x][p1.pos_y+1] == 0){
                     map.imprimirCuad(map.cuad, grafico);
                     p1.moverAbajo(p1,grafico);
+                    p1.verificarC(map,btnac);
                 }
             }
         });
@@ -125,8 +139,19 @@ public class graficos extends Application {
                 p1.verificarS(map.cuadC);
                 map.imprimirCuad(map.cuad, grafico);
                 p1.imprimirJugador(grafico);
-            }
+            }   
+        });
+        
+        btnac.setOnAction(new EventHandler<ActionEvent>() {
             
+            @Override
+            public void handle(ActionEvent event) {
+                p1.abrirC(map);
+                map.imprimirCuad(map.cuad, grafico);
+                p1.imprimirJugador(grafico);
+                btnac.setVisible(false);
+                din.setText(Integer.toString(p1.din));
+            }   
         });
         
         new AnimationTimer(){

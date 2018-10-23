@@ -9,6 +9,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import java.util.Random;
 
+
 /**
  *
  * @author LOLO
@@ -31,17 +32,6 @@ public class mapa {
 
     public void setCuad(int[][] cuad) {
         this.cuad = cuad;
-    }
-    
-    public void setCuad(){
-        int[][] multi = new int[][]{
-  { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 },
-  { 0, 2, 2, 1, 1, 1, 1, 1, 0, 0 },
-  { 0, 0, 0, 1, 1, 0, 0, 1, 0, 0 },
-  { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 },
-  { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 }
-};
-        this.cuad = multi;
     }
     
     public void generarCueva(){
@@ -112,6 +102,41 @@ public int contarVecinosVivos(int[][] map, int x, int y){
     }
     return cuenta;
 }
+
+public int contarVecinost(int[][] map, int x, int y){
+    int cuenta = 0;
+    for(int i=-1; i<2; i++){
+        for(int j=-1; j<2; j++){
+            int vecino_x = x+i;
+            int vecino_y = y+j;
+           
+            if(i == 0 && j == 0){
+            }
+            
+            else if(map[vecino_x][vecino_y] == 3){
+                cuenta = cuenta + 1;
+            }
+        }
+    }
+    return cuenta;
+}
+
+public int rt(int[][] map, int x, int y){
+    int cuenta = 0;
+    for(int i=-1; i<2; i++){
+        for(int j=-1; j<2; j++){
+            int vecino_x = x+i;
+            int vecino_y = y+j;
+
+            if(map[vecino_x][vecino_y] == 3){
+                cuenta++;
+                map[vecino_x][vecino_y] = 6;
+            }
+        }
+    }
+    return cuenta;
+}
+
 public void ponerPolvo(int[][] map){
     Random rand = new Random();
     int piso = 1;
@@ -131,6 +156,7 @@ public void ponerPolvo(int[][] map){
 }
 
 public void ponerTesoro(int[][] mapa){
+  
     int tesoroescondido = 5;
     for (int x=0; x < this.filas; x++){
         for (int y=0; y < this.columnas; y++){
@@ -164,6 +190,7 @@ public void generarColisiones(int [][] mapa){
         Image m3 = new Image("graficos/secuencia/tiletesoro.png");
         Image m4 = new Image("graficos/secuencia/tile4.png");
         Image m5 = new Image("graficos/secuencia/tile5.png");
+        Image m6 = new Image("graficos/secuencia/tiletesoroa.png");
         for(int x=0;x<this.filas;x++){
             for(int y=0;y<this.columnas;y++){
                 if(cuad[x][y] == 1)
@@ -176,9 +203,12 @@ public void generarColisiones(int [][] mapa){
                     grafico.drawImage(m4,x*16,y*16);
                 if(cuad[x][y] == 5)
                     grafico.drawImage(m5,x*16,y*16);
+                if(cuad[x][y] == 6)
+                    grafico.drawImage(m6,x*16,y*16);
             }
         }
         
    }
       
 }
+
