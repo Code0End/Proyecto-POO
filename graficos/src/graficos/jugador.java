@@ -52,27 +52,16 @@ public class jugador {
     }
     
     public void verificarS(int[][] collisionador){
-        if(this.ent == 0){
-            while(collisionador[this.pos_x][this.pos_y] == 1 ){
-                this.pos_x = this.pos_x-1;
-                if(this.pos_x <= 0){
-                    this.ent = 1;
-                    break;
-                }
-            }
+        Random rand = new Random();
+        int  x = rand.nextInt(30);
+        int  y = rand.nextInt(30);
+          
+        while(collisionador[x][y] == 1){
+            x = rand.nextInt(30);
+            y = rand.nextInt(30);
         }
-        if(this.ent == 1){
-            while(collisionador[this.pos_x][this.pos_y] == 1 ){
-                this.pos_x = this.pos_x+1;
-                if(this.pos_x >= 30){
-                    while(collisionador[this.pos_x][this.pos_y] == 1){
-                        this.pos_x = this.pos_x-1;
-                    }
-                    this.ent = 0;
-                    break;
-                }
-            }  
-        }
+        this.pos_x = x;
+        this.pos_y = y;
     }
     
     public void imprimirJugador(GraphicsContext grafico){

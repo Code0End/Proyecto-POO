@@ -22,6 +22,7 @@ public class mapa {
     public int columnas = 31;
     public int limiteN = 4;
     public int limiteM = 3;
+    public static int contadorCombates=0;
     
     mapa(){
     }
@@ -209,6 +210,29 @@ public void generarColisiones(int [][] mapa){
         }
         
    }
+   
+   public  void combatir(int x, int y){
+        Random rand = new Random();
+        int propuesta = rand.nextInt(100);
+        if (this.cuadC[x][y]==4||this.cuadC[x][y]==5){
+            propuesta=propuesta+10;
+        }
+        if(mapa.contadorCombates!=0){
+            propuesta=propuesta-(mapa.contadorCombates*5);
+        }
+        if(propuesta>50&&propuesta <=100){
+            mapa.contadorCombates++;
+            int probabilidad = rand.nextInt(100);
+            if (probabilidad > 0 && probabilidad <40){
+                System.out.println("Monstruo 1 apareció");
+            }
+            else if (probabilidad > 40 && probabilidad < 70){
+                System.out.println("Monstruo 2 apareció");
+            }
+            else if(probabilidad > 70 ){
+                System.out.println("Monstruo 3 apareció");
+            }
+        }
+    }
       
 }
-

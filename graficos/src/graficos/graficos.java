@@ -89,6 +89,7 @@ public class graficos extends Application {
                     map.imprimirCuad(map.cuad, grafico);
                     p1.moverIzq(p1,grafico);
                     p1.verificarC(map,btnac);
+                    map.combatir(p1.pos_x, p1.pos_y);
                 }
             }
         });
@@ -100,6 +101,7 @@ public class graficos extends Application {
                     map.imprimirCuad(map.cuad, grafico);
                     p1.moverDer(p1,grafico);
                     p1.verificarC(map,btnac);
+                    map.combatir(p1.pos_x, p1.pos_y);
                 }
             }
         });
@@ -111,6 +113,7 @@ public class graficos extends Application {
                     map.imprimirCuad(map.cuad, grafico);
                     p1.moverArriba(p1,grafico);
                     p1.verificarC(map,btnac);
+                    map.combatir(p1.pos_x, p1.pos_y);
                 }
             }
         });
@@ -122,6 +125,7 @@ public class graficos extends Application {
                     map.imprimirCuad(map.cuad, grafico);
                     p1.moverAbajo(p1,grafico);
                     p1.verificarC(map,btnac);
+                    map.combatir(p1.pos_x, p1.pos_y);
                 }
             }
         });
